@@ -1,0 +1,97 @@
+<div
+  class="container-fluid"
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0038a8 33%, #ce1126 33%, #ce1126 66%, #fcd116 66%);
+    font-family: Arial, sans-serif;
+  "
+>
+  <div
+    style="
+      background-color: #ffffff;
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    "
+  >
+    <!-- Heading -->
+    <h2 style="font-size: 28px; color: #0038a8; margin-bottom: 2rem;">Create an Account</h2>
+
+    <!-- Registration Form -->
+    <form
+      (ngSubmit)="onSubmit()"
+      #registrationForm="ngForm"
+      style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;"
+    >
+      <!-- Email Field -->
+      <div class="form-group" style="width: 100%;">
+        <label for="email" style="font-weight: bold; margin-bottom: 0.5rem; display: block;">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+          style="padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px; width: 100%;"
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group" style="width: 100%;">
+        <label for="password" style="font-weight: bold; margin-bottom: 0.5rem; display: block;">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          [(ngModel)]="user.password"
+          name="password"
+          required
+          minlength="6"
+          style="padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px; width: 100%;"
+        />
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="form-group" style="width: 100%;">
+        <label for="confirmPassword" style="font-weight: bold; margin-bottom: 0.5rem; display: block;">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          required
+          style="padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px; width: 100%;"
+        />
+      </div>
+
+      <!-- Error Message for Password Mismatch -->
+      <div *ngIf="passwordMismatch" class="text-danger mb-3" style="font-size: 14px;">
+        Passwords do not match!
+      </div>
+
+      <!-- Register Button -->
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!registrationForm.form.valid || passwordMismatch"
+        style="align-self: center; padding: 10px 20px; font-size: 16px; font-weight: bold;"
+      >
+        Register
+      </button>
+    </form>
+
+    <!-- Success Message -->
+    <div *ngIf="isSubmitted" class="mt-4 text-center">
+      <h3 style="color: #0038a8;">Registration Successful!</h3>
+      <p style="font-size: 14px;"><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+  </div>
+</div>
